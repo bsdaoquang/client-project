@@ -1,9 +1,12 @@
+import { Button } from 'antd'
 import React from 'react'
 
 function HomeScreen()
 {
   return (
-    <div className='bg-danger'>HomeScreen</div>
+    <div className=''>
+      <Button>fsahfk</Button>
+    </div>
   )
 }
 
