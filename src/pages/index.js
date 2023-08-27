@@ -3,7 +3,7 @@ import React from 'react'
 function HomeScreen()
 {
   return (
-    <div className='bg-danger'>HomeScreen</div>
+    <div className=''>HomeScreen</div>
   )
 }
 
