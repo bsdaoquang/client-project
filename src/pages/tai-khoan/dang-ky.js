@@ -5,9 +5,12 @@ import { Button, Card, Form, Input, message } from 'antd';
 import { Sms } from 'iconsax-react';
 import Link from 'next/link';
 import React, { useRef } from 'react';
+import authenticationAPI from '../api/authAPI';
+import { useRouter } from 'next/router';
 
 function RegisterPage() {
 	const formRef = useRef();
+	const router = useRouter();
 
 	const handleRegister = async (values) => {
 		const isEmail = Validation.email(values.email);
@@ -17,7 +20,26 @@ function RegisterPage() {
 
 			if (isValiPass) {
 				if (values.password === values.confirm) {
-					console.log('Register');
+					try {
+						const res = await authenticationAPI.HandleAuthenticationAPI(
+							'/register',
+							{
+								email: values.email,
+								password: values.password,
+							},
+							'post'
+						);
+
+						if (res && res.data) {
+							message.success('Đăng ký thành công');
+							localStorage.setItem('accessToken', res.data.accesstoken);
+							router.push('/');
+						} else {
+							message.error(`can not register`);
+						}
+					} catch (error) {
+						console.error(error);
+					}
 				} else {
 					message.error('Password not match');
 				}

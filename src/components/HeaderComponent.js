@@ -2,11 +2,19 @@
 
 import { Avatar, Button, Space } from 'antd';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function HeaderComponent() {
 	const [isLogin, setIsLogin] = useState(false);
 	const router = useRouter();
+
+	useEffect(() => {
+		const res = localStorage.getItem('accessToken');
+
+		if (res) {
+			setIsLogin(true);
+		}
+	}, []);
 
 	return (
 		<div className='header'>
