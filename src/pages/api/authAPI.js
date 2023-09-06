@@ -14,10 +14,6 @@ class AuthAPI {
 			onUploadProgress: onProgress ? onProgress : () => {},
 		});
 	};
-
-	HandleRemoveUser = () => {
-		return 'Hello';
-	};
 }
 
 const authenticationAPI = new AuthAPI();
