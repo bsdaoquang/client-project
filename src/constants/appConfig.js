@@ -6,4 +6,7 @@ export const appConfig = {
 		fontSize: '16px',
 		title: '20px',
 	},
+	localDataNames: {
+		accessToken: 'accessToken',
+	},
 };

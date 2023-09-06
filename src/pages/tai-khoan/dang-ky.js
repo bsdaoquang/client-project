@@ -7,6 +7,7 @@ import Link from 'next/link';
 import React, { useRef } from 'react';
 import authenticationAPI from '../api/authAPI';
 import { useRouter } from 'next/router';
+import { appConfig } from '@/constants/appConfig';
 
 function RegisterPage() {
 	const formRef = useRef();
@@ -32,7 +33,10 @@ function RegisterPage() {
 
 						if (res && res.data) {
 							message.success('Đăng ký thành công');
-							localStorage.setItem('accessToken', res.data.accesstoken);
+							localStorage.setItem(
+								appConfig.localDataNames.accessToken,
+								res.data.accesstoken
+							);
 							router.push('/');
 						} else {
 							message.error(`can not register`);
