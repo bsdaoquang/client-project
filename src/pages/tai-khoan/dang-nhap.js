@@ -5,9 +5,15 @@ import { Lock, Sms } from 'iconsax-react';
 import React, { useRef, useState } from 'react';
 import authenticationAPI from '../api/authAPI';
 import { appConfig } from '@/constants/appConfig';
+import { useDispatch } from 'react-redux';
+import { addAuth } from '@/redux/reducers/authRecucer';
+import { useRouter } from 'next/router';
 
 function LoginPage() {
 	const formRef = useRef();
+	const router = useRouter();
+
+	const dispatch = useDispatch();
 
 	const handleLogin = async (values) => {
 		const api = '/login';
@@ -22,12 +28,14 @@ function LoginPage() {
 			if (res) {
 				message.success(`Welcome back ${res.email}`);
 
-				window.history.back();
+				dispatch(addAuth(res));
 
 				localStorage.setItem(
 					appConfig.localDataNames.accessToken,
 					res.accesstoken
 				);
+
+				router.push('/');
 			}
 		} catch (error) {
 			console.log(error);

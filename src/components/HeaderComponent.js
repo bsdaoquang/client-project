@@ -2,19 +2,15 @@
 
 import { Avatar, Button, Space } from 'antd';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function HeaderComponent() {
-	const [isLogin, setIsLogin] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const router = useRouter();
 
-	useEffect(() => {
-		const res = localStorage.getItem('accessToken');
-
-		if (res) {
-			setIsLogin(true);
-		}
-	}, []);
+	const user = useSelector((state) => state.auth.authData);
 
 	return (
 		<div className='header'>
@@ -22,7 +18,7 @@ function HeaderComponent() {
 				<div className='row'>
 					<div className='col menu-header'>Menu</div>
 					<div style={{ padding: '10px 20px' }}>
-						{isLogin ? (
+						{user.uid && user.accesstoken ? (
 							<Space>
 								<Avatar size={40} />
 							</Space>

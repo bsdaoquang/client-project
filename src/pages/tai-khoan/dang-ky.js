@@ -8,6 +8,8 @@ import React, { useRef } from 'react';
 import authenticationAPI from '../api/authAPI';
 import { useRouter } from 'next/router';
 import { appConfig } from '@/constants/appConfig';
+import { useDispatch } from 'react-redux';
+import authRecucer, { addAuth } from '@/redux/reducers/authRecucer';
 
 function RegisterPage() {
 	const formRef = useRef();
@@ -15,6 +17,8 @@ function RegisterPage() {
 
 	const handleRegister = async (values) => {
 		const isEmail = Validation.email(values.email);
+
+		const dispatch = useDispatch();
 
 		if (isEmail) {
 			const isValiPass = Validation.password(values.password);
@@ -33,6 +37,9 @@ function RegisterPage() {
 
 						if (res && res.data) {
 							message.success('Đăng ký thành công');
+
+							dispatch(addAuth(res));
+
 							localStorage.setItem(
 								appConfig.localDataNames.accessToken,
 								res.data.accesstoken

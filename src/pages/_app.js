@@ -1,18 +1,25 @@
-import { FooterComponent, HeaderComponent } from '@/components'
-import '@/styles/globals.css'
-import { Layout } from 'antd'
+/** @format */
 
-const { Content } = Layout
+import { FooterComponent, HeaderComponent } from '@/components';
+import store from '@/redux/store';
+import '@/styles/globals.css';
+import { Layout } from 'antd';
+import { Provider } from 'react-redux';
 
-export default function App({ Component, pageProps })
-{
-  return <Layout>
-    <HeaderComponent />
-    <Content>
-      <div className='container bg-white' style={{ height: '100vh' }}>
-        <Component {...pageProps} />
-      </div>
-    </Content>
-    <FooterComponent />
-  </Layout>
+const { Content } = Layout;
+
+export default function App({ Component, pageProps }) {
+	return (
+		<Provider store={store}>
+			<Layout>
+				<HeaderComponent />
+				<Content>
+					<div className='container bg-white' style={{ height: '100vh' }}>
+						<Component {...pageProps} />
+					</div>
+				</Content>
+				<FooterComponent />
+			</Layout>
+		</Provider>
+	);
 }
