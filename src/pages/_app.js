@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
 			<Layout>
 				<HeaderComponent />
 				<Content>
-					<div className='container bg-white' style={{ height: '100vh' }}>
+					<div className='container ' style={{ height: '100vh' }}>
 						<Component {...pageProps} />
 					</div>
 				</Content>
